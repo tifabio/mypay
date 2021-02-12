@@ -1,0 +1,31 @@
+version: "3.2"
+
+services:
+
+    laravel:
+        image: lorisleiva/laravel-docker:7.4
+        container_name: lumen-mypay
+        privileged: true
+        volumes:
+            - .:/var/www/lumen/
+        working_dir: /var/www/lumen/
+        ports:
+            - 8080:8080
+        networks:
+            - internal
+        command: php -S 0.0.0.0:8080 -t public
+
+    mysql:
+        image: mysql:5.7
+        container_name: db-mypay
+        environment:
+            MYSQL_ROOT_PASSWORD: "root"
+            MYSQL_DATABASE: mypay
+        ports:
+            - "3306:3306"
+        networks:
+            - internal
+
+networks:
+    internal:
+        driver: bridge

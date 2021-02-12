@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-      mysql:
+      db-mypay:
         image: mysql:5.7
         ports:
           - 3306:3306

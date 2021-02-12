@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  phpunit:
+    name: PHPUnit
+
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:5.7
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_USER: root 
+          MYSQL_PASSWORD: root
+          MYSQL_DATABASE: mypay
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: tifabio/lumen-phpunit-action@master

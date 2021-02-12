@@ -5,6 +5,7 @@
 ```sh
 $ docker-compose up --build
 $ docker exec -it lumen-mypay composer install
+$ docker exec -it cp .env.example .env
 $ docker exec -it lumen-mypay php artisan migrate:fresh --seed
 ```
 

@@ -19,6 +19,8 @@ class UserHasBalance implements Rule
 
     /**
      * Create a new rule instance.
+     * 
+     * @param float $requestedValue
      *
      * @return void
      */

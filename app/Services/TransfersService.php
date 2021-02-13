@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Events\AuthorizeTransferEvent;
 use App\Models\TransfersStatus;
 use App\Repositories\TransfersRepository;
 use Exception;
@@ -37,6 +38,7 @@ class TransfersService
 
         if($transfer = $this->transfersRepository->save($transfer))
         {
+            event(new AuthorizeTransferEvent($transfer));
             return $transfer;
         }
 

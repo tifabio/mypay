@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Users;
+use App\Models\UsersTypes;
 use Illuminate\Support\Facades\Hash;
 
 class UsersRepository
@@ -43,7 +44,7 @@ class UsersRepository
                 'email' => 'fulano@teste.dev',
                 'password' => Hash::make('fulano@123'),
                 'balance' => 500.00,
-                'type' => Users::TYPE_USER
+                'users_types_id' => UsersTypes::TYPE_USER
             ],
             [
                 'name' => 'Beltrano',
@@ -51,7 +52,7 @@ class UsersRepository
                 'email' => 'beltrano@teste.dev',
                 'password' => Hash::make('beltrano@123'),
                 'balance' => 100.00,
-                'type' => Users::TYPE_USER
+                'users_types_id' => UsersTypes::TYPE_USER
             ],
             [
                 'name' => 'Ciclano',
@@ -59,7 +60,7 @@ class UsersRepository
                 'email' => 'ciclano@teste.dev',
                 'password' => Hash::make('ciclano@123'),
                 'balance' => 0.00,
-                'type' => Users::TYPE_SHOPKEEPER
+                'users_types_id' => UsersTypes::TYPE_SHOPKEEPER
             ],
         ];
     }

@@ -15,14 +15,15 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name');
             $table->string('document', 14)->unique();
             $table->string('email')->unique();
             $table->string('password');
             $table->float('balance', 10, 2)->default(0);
-            $table->enum('type', [Users::TYPE_USER, Users::TYPE_SHOPKEEPER])->default(Users::TYPE_USER);
             $table->timestamps();
+
+            $table->foreignId('users_types_id')->constrained('users_types', 'id');
         });
     }
 

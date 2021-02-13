@@ -15,7 +15,7 @@ class UsersTypesSeeder extends Seeder
     public function run()
     {
         /**
-         * @var UsersTypes $model
+         * @var UsersTypes
          */
         $model = app(UsersTypes::class);
         

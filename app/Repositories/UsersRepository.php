@@ -34,6 +34,11 @@ class UsersRepository
 
         return [];
     }
+
+    public function find(int $id)
+    {
+        return $this->model->find($id);
+    }
     
     public function fakeUsers()
     {

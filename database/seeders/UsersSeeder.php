@@ -15,7 +15,7 @@ class UsersSeeder extends Seeder
     public function run()
     {
         /**
-         * @var UsersRepository $userRepository
+         * @var UsersRepository
          */
         $userRepository = app(UsersRepository::class);
         $fakeUsers = $userRepository->fakeUsers();

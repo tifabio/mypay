@@ -15,7 +15,7 @@ class NotificationsStatusSeeder extends Seeder
     public function run()
     {
         /**
-         * @var NotificationsStatus $model
+         * @var NotificationsStatus
          */
         $model = app(NotificationsStatus::class);
 

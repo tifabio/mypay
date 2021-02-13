@@ -20,13 +20,13 @@ class UsersTypesSeeder extends Seeder
         $model = app(UsersTypes::class);
         
         $model->create([
-            'id' => 1,
-            'type' => UsersTypes::TYPE_USER 
+            'id' => UsersTypes::TYPE_USER,
+            'type' => 'user'
         ]);
 
         $model->create([
-            'id' => 2,
-            'type' => UsersTypes::TYPE_SHOPKEEPER 
+            'id' => UsersTypes::TYPE_SHOPKEEPER,
+            'type' => 'shopkeeper' 
         ]);
     }
 }

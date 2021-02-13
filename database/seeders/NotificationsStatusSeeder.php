@@ -20,13 +20,13 @@ class NotificationsStatusSeeder extends Seeder
         $model = app(NotificationsStatus::class);
 
         $model->create([
-            'id' => 1,
-            'status' => NotificationsStatus::STATUS_PENDING
+            'id' => NotificationsStatus::STATUS_PENDING,
+            'status' => 'pending'
         ]);
 
         $model->create([
-            'id' => 2,
-            'status' => NotificationsStatus::STATUS_SENT 
+            'id' => NotificationsStatus::STATUS_SENT,
+            'status' => 'sent'
         ]);
     }
 }

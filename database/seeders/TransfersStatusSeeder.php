@@ -20,23 +20,23 @@ class TransfersStatusSeeder extends Seeder
         $model = app(TransfersStatus::class);
 
         $model->create([
-            'id' => 1,
-            'status' => TransfersStatus::STATUS_PENDING 
+            'id' => TransfersStatus::STATUS_PENDING,
+            'status' => 'pending'
         ]);
 
         $model->create([
-            'id' => 2,
-            'status' => TransfersStatus::STATUS_CANCELED 
+            'id' => TransfersStatus::STATUS_CANCELED ,
+            'status' => 'canceled'
         ]);
 
         $model->create([
-            'id' => 3,
-            'status' => TransfersStatus::STATUS_APPROVED 
+            'id' => TransfersStatus::STATUS_APPROVED,
+            'status' => 'approved'
         ]);
 
         $model->create([
-            'id' => 4,
-            'status' => TransfersStatus::STATUS_FINISHED 
+            'id' => TransfersStatus::STATUS_FINISHED,
+            'status' => 'finished'
         ]);
     }
 }

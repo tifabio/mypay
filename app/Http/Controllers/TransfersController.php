@@ -29,7 +29,7 @@ class TransfersController extends Controller
         $this->transfersService = $transfersService;
     }
 
-    public function save(Request $request)
+    public function create(Request $request)
     {
         $this->validateSaveRequest($request);
 

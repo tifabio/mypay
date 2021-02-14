@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Users;
+use App\Services\TransfersService;
 use Illuminate\Http\Response;
 use Laravel\Lumen\Testing\DatabaseTransactions;
 
@@ -8,12 +9,21 @@ class TransfersTest extends TestCase
 {
     use DatabaseTransactions;
 
+    /**
+     * @var Users $userModel
+     */
     private $userModel;
+
+    /**
+     * @var TransfersService $transferService
+     */
+    private $transferService;
 
     public function setUp(): void
     {
         parent::setUp();
         $this->userModel = $this->app->make(Users::class);
+        $this->transferService = $this->app->make(TransfersService::class);
     }
 
     /**
@@ -22,7 +32,7 @@ class TransfersTest extends TestCase
      */
     public function testUserCanNotTransfer()
     {
-        $this->post(route('transfer.save'), [
+        $this->json('POST', route('transfer.create'), [
             'value' => '100',
             'payer' => '3',
             'payee' => '1'
@@ -36,7 +46,7 @@ class TransfersTest extends TestCase
      */
     public function testUserHasBalance()
     {
-        $this->post(route('transfer.save'), [
+        $this->json('POST', route('transfer.create'), [
             'value' => '600',
             'payer' => '1',
             'payee' => '2'
@@ -53,7 +63,7 @@ class TransfersTest extends TestCase
         $payer_id = 1;
         $payee_id = 2;
 
-        $this->post(route('transfer.save'), [
+        $this->json('POST', route('transfer.create'), [
             'value' => '200',
             'payer' => $payer_id,
             'payee' => $payee_id
@@ -62,5 +72,31 @@ class TransfersTest extends TestCase
 
         $this->assertEquals(300, $this->userModel->find($payer_id)->balance);
         $this->assertEquals(250, $this->userModel->find($payee_id)->balance);
+    }
+
+    /**
+     * Test revert transfer
+     * Users created by seed using fakeUsers (from UsersRepository)
+     */
+    public function testRevertTransfer()
+    {
+        $payer_id = 1;
+        $payee_id = 2;
+
+        $this->json('POST', route('transfer.create'), [
+            'value' => '200',
+            'payer' => $payer_id,
+            'payee' => $payee_id
+        ])
+        ->seeStatusCode(Response::HTTP_CREATED);
+
+        $this->assertEquals(300, $this->userModel->find($payer_id)->balance);
+        $this->assertEquals(250, $this->userModel->find($payee_id)->balance);
+
+        $response = json_decode($this->response->getContent());
+        $this->transferService->revert($response->id);
+
+        $this->assertEquals(500, $this->userModel->find($payer_id)->balance);
+        $this->assertEquals(50, $this->userModel->find($payee_id)->balance);
     }
 }

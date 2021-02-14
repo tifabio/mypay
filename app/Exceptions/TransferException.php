@@ -11,8 +11,10 @@ class TransferException extends Exception
     const CANCEL_ERROR = 'Error creating transfer';
     const FINISH_ERROR = 'Error finishing transfer';
     const TRANSFER_ERROR = 'Error transfering value between users';
+    const REVERT_ERROR = 'Error reverting the transfer';
     const WRONG_STATUS_APPROVED = 'Wrong transfer status, expected approved';
     const WRONG_STATUS_PENDING = 'Wrong transfer status, expected pending';
+    const WRONG_STATUS_FINISHED = 'Wrong transfer status, expected finished';
 
     public function __construc($message, $code = 0) {
         parent::__construct($message, $code);

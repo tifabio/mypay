@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Events\AuthorizeTransferEvent;
+use App\Events\CancelTransferEvent;
 use App\Events\FinishTransferEvent;
 use App\Exceptions\TransferException;
 use App\Models\Transfers;
@@ -114,5 +115,38 @@ class TransfersService
         }
 
         throw new TransferException(TransferException::WRONG_STATUS_APPROVED);
+    }
+
+    public function revert(int $id)
+    {
+        $transfer = $this->transfersRepository->findOrFail($id);
+
+        if($transfer->transfers_status_id === TransfersStatus::STATUS_FINISHED)
+        {
+            // Payer refunds money
+            $transfer->payer->balance += $transfer->value;
+            $payerRefund = $transfer->payer->save();
+
+            if($payerRefund)
+            {
+                // Payee returns money
+                $transfer->payee->balance -= $transfer->value;
+                $payeeReturn = $transfer->payee->save();
+
+                if($payeeReturn)
+                {
+                    event(new CancelTransferEvent($transfer));
+                    return $transfer;
+                }
+
+                // Revert failed, back to original
+                $transfer->payer->balance -= $transfer->value;
+                $transfer->payer->save();
+            }
+
+            throw new TransferException(TransferException::REVERT_ERROR);
+        }
+
+        throw new TransferException(TransferException::WRONG_STATUS_FINISHED);
     }
 }

@@ -42,6 +42,6 @@ class AuthorizerService
             return;
         }
 
-        throw new Exception('Wrong transfer status');
+        throw new Exception('Wrong transfer status while authorizing');
     }
 }

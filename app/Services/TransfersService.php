@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Events\AuthorizeTransferEvent;
+use App\Events\FinishTransferEvent;
 use App\Models\Transfers;
 use App\Models\TransfersStatus;
 use App\Repositories\TransfersRepository;
@@ -54,7 +55,6 @@ class TransfersService
         
         if($transfer->save())
         {
-            // event(new FinishTransferEvent($transfer));
             return $transfer;
         }
 
@@ -71,5 +71,36 @@ class TransfersService
         }
 
         throw new Exception('Error canceling transfer');
+    }
+
+    public function transfer(Transfers $transfer)
+    {
+        if($transfer->transfers_status_id === TransfersStatus::STATUS_APPROVED)
+        {
+            // Payer send money
+            $transfer->payer->balance -= $transfer->value;
+            $payerPay = $transfer->payer->save();
+
+            if($payerPay)
+            {
+                // Payee receives money
+                $transfer->payee->balance += $transfer->value;
+                $payeeReceive = $transfer->payee->save();
+
+                if($payeeReceive)
+                {
+                    event(new FinishTransferEvent($transfer));
+                    return $transfer;
+                }
+
+                // Payment failed, return money to payer
+                $transfer->payer->balance += $transfer->value;
+                $transfer->payer->save();
+            }
+
+            return;
+        }
+
+        throw new Exception('Wrong transfer status while finishing');
     }
 }

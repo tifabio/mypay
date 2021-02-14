@@ -17,4 +17,27 @@ class Transfers extends Model
         'payee_id',
         'transfers_status_id'
     ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'payer',
+        'payee',
+        'status'
+    ];
+
+    public function payer() {
+        return $this->hasOne(Users::class, 'id', 'payer_id');
+    }
+
+    public function payee() {
+        return $this->hasOne(Users::class, 'id', 'payee_id');
+    }
+
+    public function status() {
+        return $this->hasOne(TransfersStatus::class, 'id', 'transfers_status_id');
+    }
 }

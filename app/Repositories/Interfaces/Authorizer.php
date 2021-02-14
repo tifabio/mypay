@@ -2,9 +2,9 @@
 
 namespace App\Repositories\Interfaces;
 
-use App\Models\Transfers;
+use App\Models\Transfer;
 
 interface Authorizer
 {
-    public function isAuthorized(Transfers $transfer);
+    public function isAuthorized(Transfer $transfer);
 }

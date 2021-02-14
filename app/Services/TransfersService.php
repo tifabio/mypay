@@ -6,7 +6,7 @@ use App\Events\AuthorizeTransferEvent;
 use App\Events\CancelTransferEvent;
 use App\Events\FinishTransferEvent;
 use App\Exceptions\TransferException;
-use App\Models\Transfers;
+use App\Models\Transfer;
 use App\Models\TransferStatus;
 use App\Repositories\TransfersRepository;
 
@@ -50,7 +50,7 @@ class TransfersService
         throw new TransferException(TransferException::CREATE_ERROR);
     }
 
-    public function approve(Transfers $transfer)
+    public function approve(Transfer $transfer)
     {
         $transfer->transfer_status_id = TransferStatus::STATUS_APPROVED;
         
@@ -62,7 +62,7 @@ class TransfersService
         throw new TransferException(TransferException::APPROVE_ERROR);
     }
 
-    public function cancel(Transfers $transfer)
+    public function cancel(Transfer $transfer)
     {
         $transfer->transfer_status_id = TransferStatus::STATUS_CANCELED;
         
@@ -74,7 +74,7 @@ class TransfersService
         throw new TransferException(TransferException::CANCEL_ERROR);
     }
 
-    public function finish(Transfers $transfer)
+    public function finish(Transfer $transfer)
     {
         $transfer->transfer_status_id = TransferStatus::STATUS_FINISHED;
         
@@ -86,7 +86,7 @@ class TransfersService
         throw new TransferException(TransferException::FINISH_ERROR);
     }
 
-    public function transfer(Transfers $transfer)
+    public function transfer(Transfer $transfer)
     {
         if($transfer->transfer_status_id === TransferStatus::STATUS_APPROVED)
         {

@@ -2,16 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Models\Transfers;
+use App\Models\Transfer;
 
 class TransfersRepository
 {
     /**
-     * @var Transfers
+     * @var Transfer
      */
     private $model;
 
-    public function __construct(Transfers $transfers)
+    public function __construct(Transfer $transfers)
     {
         $this->model = $transfers;
     }

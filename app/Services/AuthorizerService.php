@@ -6,9 +6,8 @@ use App\Events\ApproveTransferEvent;
 use App\Events\CancelTransferEvent;
 use App\Exceptions\TransferException;
 use App\Models\Transfers;
-use App\Models\TransfersStatus;
+use App\Models\TransferStatus;
 use App\Repositories\Interfaces\Authorizer;
-use Exception;
 
 class AuthorizerService
 {
@@ -29,7 +28,7 @@ class AuthorizerService
 
     public function process(Transfers $transfer)
     {
-        if($transfer->transfers_status_id === TransfersStatus::STATUS_PENDING)
+        if($transfer->transfer_status_id === TransferStatus::STATUS_PENDING)
         {
             $approved = $this->authorizer->isAuthorized($transfer);
 

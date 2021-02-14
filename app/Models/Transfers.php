@@ -15,7 +15,7 @@ class Transfers extends Model
         'value',
         'payer_id',
         'payee_id',
-        'transfers_status_id'
+        'transfer_status_id'
     ];
 
     /**
@@ -38,6 +38,6 @@ class Transfers extends Model
     }
 
     public function status() {
-        return $this->hasOne(TransfersStatus::class, 'id', 'transfers_status_id');
+        return $this->hasOne(TransferStatus::class, 'id', 'transfer_status_id');
     }
 }

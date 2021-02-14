@@ -20,7 +20,7 @@ class CreateTransfersTable extends Migration
 
             $table->foreignId('payer_id')->constrained('users', 'id');
             $table->foreignId('payee_id')->constrained('users', 'id');
-            $table->foreignId('transfers_status_id')->constrained('transfers_status', 'id');
+            $table->foreignId('transfer_status_id')->constrained('transfer_status', 'id');
         });
     }
 

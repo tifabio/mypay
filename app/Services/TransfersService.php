@@ -7,7 +7,7 @@ use App\Events\CancelTransferEvent;
 use App\Events\FinishTransferEvent;
 use App\Exceptions\TransferException;
 use App\Models\Transfers;
-use App\Models\TransfersStatus;
+use App\Models\TransferStatus;
 use App\Repositories\TransfersRepository;
 
 class TransfersService
@@ -36,7 +36,7 @@ class TransfersService
             'value' => $data['value'],
             'payer_id' => $data['payer'],
             'payee_id' => $data['payee'],
-            'transfers_status_id' => TransfersStatus::STATUS_PENDING
+            'transfer_status_id' => TransferStatus::STATUS_PENDING
         ];
 
         $transfer = $this->transfersRepository->save($transfer);
@@ -52,7 +52,7 @@ class TransfersService
 
     public function approve(Transfers $transfer)
     {
-        $transfer->transfers_status_id = TransfersStatus::STATUS_APPROVED;
+        $transfer->transfer_status_id = TransferStatus::STATUS_APPROVED;
         
         if($transfer->save())
         {
@@ -64,7 +64,7 @@ class TransfersService
 
     public function cancel(Transfers $transfer)
     {
-        $transfer->transfers_status_id = TransfersStatus::STATUS_CANCELED;
+        $transfer->transfer_status_id = TransferStatus::STATUS_CANCELED;
         
         if($transfer->save())
         {
@@ -76,7 +76,7 @@ class TransfersService
 
     public function finish(Transfers $transfer)
     {
-        $transfer->transfers_status_id = TransfersStatus::STATUS_FINISHED;
+        $transfer->transfer_status_id = TransferStatus::STATUS_FINISHED;
         
         if($transfer->save())
         {
@@ -88,7 +88,7 @@ class TransfersService
 
     public function transfer(Transfers $transfer)
     {
-        if($transfer->transfers_status_id === TransfersStatus::STATUS_APPROVED)
+        if($transfer->transfer_status_id === TransferStatus::STATUS_APPROVED)
         {
             // Payer send money
             $transfer->payer->balance -= $transfer->value;
@@ -121,7 +121,7 @@ class TransfersService
     {
         $transfer = $this->transfersRepository->findOrFail($id);
 
-        if($transfer->transfers_status_id === TransfersStatus::STATUS_FINISHED)
+        if($transfer->transfer_status_id === TransferStatus::STATUS_FINISHED)
         {
             // Payer refunds money
             $transfer->payer->balance += $transfer->value;

@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\TransfersStatus;
+use App\Models\TransferStatus;
 use Illuminate\Database\Seeder;
 
-class TransfersStatusSeeder extends Seeder
+class TransferStatusSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,25 +17,25 @@ class TransfersStatusSeeder extends Seeder
         /**
          * @var TransferStatus $model
          */
-        $model = app(TransfersStatus::class);
+        $model = app(TransferStatus::class);
 
         $model->create([
-            'id' => TransfersStatus::STATUS_PENDING,
+            'id' => TransferStatus::STATUS_PENDING,
             'status' => 'pending'
         ]);
 
         $model->create([
-            'id' => TransfersStatus::STATUS_CANCELED ,
+            'id' => TransferStatus::STATUS_CANCELED ,
             'status' => 'canceled'
         ]);
 
         $model->create([
-            'id' => TransfersStatus::STATUS_APPROVED,
+            'id' => TransferStatus::STATUS_APPROVED,
             'status' => 'approved'
         ]);
 
         $model->create([
-            'id' => TransfersStatus::STATUS_FINISHED,
+            'id' => TransferStatus::STATUS_FINISHED,
             'status' => 'finished'
         ]);
     }

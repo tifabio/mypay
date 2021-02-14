@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->float('balance', 10, 2)->default(0);
             $table->timestamps();
 
-            $table->foreignId('users_types_id')->constrained('users_types', 'id');
+            $table->foreignId('user_types_id')->constrained('user_types', 'id');
         });
     }
 

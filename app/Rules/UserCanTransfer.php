@@ -2,7 +2,7 @@
 
 namespace App\Rules;
 
-use App\Models\UsersTypes;
+use App\Models\UserType;
 use App\Repositories\UsersRepository;
 use Illuminate\Contracts\Validation\Rule;
 
@@ -33,7 +33,7 @@ class UserCanTransfer implements Rule
     public function passes($attribute, $value)
     {
         $user = $this->usersRepository->find($value);
-        return $user->users_types_id !== UsersTypes::TYPE_SHOPKEEPER;
+        return $user->user_types_id !== UserType::TYPE_SHOPKEEPER;
     }
 
     /**

@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\UsersTypes;
+use App\Models\UserType;
 use Illuminate\Database\Seeder;
 
-class UsersTypesSeeder extends Seeder
+class UserTypesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,17 +15,17 @@ class UsersTypesSeeder extends Seeder
     public function run()
     {
         /**
-         * @var UsersTypes
+         * @var UserType
          */
-        $model = app(UsersTypes::class);
+        $model = app(UserType::class);
         
         $model->create([
-            'id' => UsersTypes::TYPE_USER,
+            'id' => UserType::TYPE_USER,
             'type' => 'user'
         ]);
 
         $model->create([
-            'id' => UsersTypes::TYPE_SHOPKEEPER,
+            'id' => UserType::TYPE_SHOPKEEPER,
             'type' => 'shopkeeper' 
         ]);
     }

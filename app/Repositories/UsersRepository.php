@@ -2,20 +2,20 @@
 
 namespace App\Repositories;
 
-use App\Models\Users;
+use App\Models\User;
 use App\Models\UsersTypes;
 use Illuminate\Support\Facades\Hash;
 
 class UsersRepository
 {
     /**
-     * @var Users
+     * @var User
      */
     private $model;
 
-    public function __construct(Users $users)
+    public function __construct(User $user)
     {
-        $this->model = $users;
+        $this->model = $user;
     }
 
     public function save(array $data, int $id = 0)

@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Users;
+use App\Models\User;
 use App\Services\TransfersService;
 use Illuminate\Http\Response;
 use Laravel\Lumen\Testing\DatabaseTransactions;
@@ -10,7 +10,7 @@ class TransfersTest extends TestCase
     use DatabaseTransactions;
 
     /**
-     * @var Users $userModel
+     * @var User $userModel
      */
     private $userModel;
 
@@ -22,7 +22,7 @@ class TransfersTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->userModel = $this->app->make(Users::class);
+        $this->userModel = $this->app->make(User::class);
         $this->transferService = $this->app->make(TransfersService::class);
     }
 

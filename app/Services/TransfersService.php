@@ -60,4 +60,16 @@ class TransfersService
 
         throw new Exception('Error approving transfer');
     }
+
+    public function cancel(Transfers $transfer)
+    {
+        $transfer->transfers_status_id = TransfersStatus::STATUS_CANCELED;
+        
+        if($transfer->save())
+        {
+            return $transfer;
+        }
+
+        throw new Exception('Error canceling transfer');
+    }
 }

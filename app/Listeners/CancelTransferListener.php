@@ -31,6 +31,6 @@ class CancelTransferListener
      */
     public function handle(CancelTransferEvent $event)
     {
-        // $this->transfersService->cancel($event->transfer);
+        $this->transfersService->cancel($event->transfer);
     }
 }

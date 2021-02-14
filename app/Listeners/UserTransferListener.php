@@ -8,7 +8,7 @@ use App\Services\TransferService;
 class UserTransferListener
 {
     /**
-     * @var TransferService $transfersService
+     * @var TransferService $transferService
      */
     private $transfersService;
 

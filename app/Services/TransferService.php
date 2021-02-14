@@ -8,26 +8,26 @@ use App\Events\FinishTransferEvent;
 use App\Exceptions\TransferException;
 use App\Models\Transfer;
 use App\Models\TransferStatus;
-use App\Repositories\TransfersRepository;
+use App\Repositories\TransferRepository;
 
 class TransferService
 {
 
     /**
-     * @var TransfersRepository
+     * @var TransferRepository
      */
-    private $transfersRepository;
+    private $transferRepository;
 
     /**
      * Create a new service instance
      * 
-     * @param TransfersRepository $transfersRepository
+     * @param TransferRepository $transferRepository
      *
      * @return void
      */
-    public function __construct(TransfersRepository $transfersRepository)
+    public function __construct(TransferRepository $transferRepository)
     {
-        $this->transfersRepository = $transfersRepository;
+        $this->transferRepository = $transferRepository;
     }
 
     public function create($data) 
@@ -39,7 +39,7 @@ class TransferService
             'transfer_status_id' => TransferStatus::STATUS_PENDING
         ];
 
-        $transfer = $this->transfersRepository->save($transfer);
+        $transfer = $this->transferRepository->save($transfer);
 
         if($transfer)
         {
@@ -119,7 +119,7 @@ class TransferService
 
     public function revert(int $id)
     {
-        $transfer = $this->transfersRepository->findOrFail($id);
+        $transfer = $this->transferRepository->findOrFail($id);
 
         if($transfer->transfer_status_id === TransferStatus::STATUS_FINISHED)
         {

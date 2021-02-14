@@ -15,18 +15,18 @@ class TransferController extends Controller
     /**
      * @var TransferService
      */
-    private $transfersService;
+    private $transferService;
 
     /**
      * Create a new controller instance
      * 
-     * @param TransferService $transfersService
+     * @param TransferService $transferService
      *
      * @return void
      */
-    public function __construct(TransferService $transfersService)
+    public function __construct(TransferService $transferService)
     {
-        $this->transfersService = $transfersService;
+        $this->transferService = $transferService;
     }
 
     public function create(Request $request)
@@ -34,7 +34,7 @@ class TransferController extends Controller
         $this->validateSaveRequest($request);
 
         try {
-            $transfer = $this->transfersService->create($request->all());
+            $transfer = $this->transferService->create($request->all());
             if($transfer) {
                 return response()->json(
                     $transfer,

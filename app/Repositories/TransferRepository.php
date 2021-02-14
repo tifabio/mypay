@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Transfer;
 
-class TransfersRepository
+class TransferRepository
 {
     /**
      * @var Transfer

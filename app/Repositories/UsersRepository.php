@@ -28,11 +28,9 @@ class UsersRepository
             return $this->model->find($id);
         }
 
-        if($user = $this->model->create($data)) {
-            return $user;
-        }
+        $user = $this->model->create($data);
 
-        return [];
+        return $user ? $user : [];
     }
 
     public function find(int $id)

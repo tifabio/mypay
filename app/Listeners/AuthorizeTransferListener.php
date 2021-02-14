@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\AuthorizeTransferEvent;
+use App\Repositories\MockyAuthorizer;
 use App\Services\AuthorizerService;
 
 class AuthorizeTransferListener
@@ -15,13 +16,11 @@ class AuthorizeTransferListener
     /**
      * Create the event listener.
      * 
-     * @param AuthorizerService $authorizerService
-     *
      * @return void
      */
-    public function __construct(AuthorizerService $authorizerService)
+    public function __construct()
     {
-        $this->authorizerService = $authorizerService;
+        $this->authorizerService = new AuthorizerService(new MockyAuthorizer);
     }
 
     /**

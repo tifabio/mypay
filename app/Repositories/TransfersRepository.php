@@ -26,11 +26,9 @@ class TransfersRepository
             return $this->model->find($id);
         }
 
-        if($transfer = $this->model->create($data)) {
-            return $transfer;
-        }
+        $transfer = $this->model->create($data);
 
-        return [];
+        return $transfer ? $transfer : [];
     }
 
     public function find(int $id)

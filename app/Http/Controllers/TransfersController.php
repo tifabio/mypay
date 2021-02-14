@@ -34,9 +34,10 @@ class TransfersController extends Controller
         $this->validateSaveRequest($request);
 
         try {
-            if($saved = $this->transfersService->create($request->all())) {
+            $transfer = $this->transfersService->create($request->all());
+            if($transfer) {
                 return response()->json(
-                    $saved,
+                    $transfer,
                     JsonResponse::HTTP_CREATED
                 );
             }

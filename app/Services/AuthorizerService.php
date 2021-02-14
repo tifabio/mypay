@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Models\Transfers;
 use App\Models\TransfersStatus;
 use App\Repositories\Interfaces\Authorizer;
-use App\Repositories\MockyAuthorizer;
 use Exception;
 
 class AuthorizerService
@@ -20,17 +19,24 @@ class AuthorizerService
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Authorizer $authorizer)
     {
-        $this->authorizer = new MockyAuthorizer();
+        $this->authorizer = $authorizer;
     }
 
     public function process(Transfers $transfer)
     {
         if($transfer->transfers_status_id === TransfersStatus::STATUS_PENDING)
         {
-            $this->authorizer->call($transfer);
+            $approved = $this->authorizer->call($transfer);
 
+            if($approved)
+            {
+                // emit approved
+                return;
+            }
+
+            // emit cancel
             return;
         }
 

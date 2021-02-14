@@ -36,7 +36,9 @@ class TransfersService
             'transfers_status_id' => TransfersStatus::STATUS_PENDING
         ];
 
-        if($transfer = $this->transfersRepository->save($transfer))
+        $transfer = $this->transfersRepository->save($transfer);
+
+        if($transfer)
         {
             event(new AuthorizeTransferEvent($transfer));
             return $transfer;

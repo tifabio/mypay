@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Events\ApproveTransferEvent;
+use App\Events\CancelTransferEvent;
 use App\Models\Transfers;
 use App\Models\TransfersStatus;
 use App\Repositories\Interfaces\Authorizer;
@@ -28,15 +30,15 @@ class AuthorizerService
     {
         if($transfer->transfers_status_id === TransfersStatus::STATUS_PENDING)
         {
-            $approved = $this->authorizer->call($transfer);
+            $approved = $this->authorizer->isAuthorized($transfer);
 
             if($approved)
             {
-                // emit approved
+                event(new ApproveTransferEvent($transfer));
                 return;
             }
 
-            // emit cancel
+            event(new CancelTransferEvent($transfer));
             return;
         }
 

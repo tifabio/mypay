@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\ApproveTransferEvent;
 use App\Events\AuthorizeTransferEvent;
+use App\Listeners\ApproveTransferListener;
 use App\Listeners\AuthorizeTransferListener;
 use Laravel\Lumen\Providers\EventServiceProvider as ServiceProvider;
 
@@ -16,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         AuthorizeTransferEvent::class => [
             AuthorizeTransferListener::class,
+        ],
+        ApproveTransferEvent::class => [
+            ApproveTransferListener::class,
         ],
     ];
 }

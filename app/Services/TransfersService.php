@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Events\AuthorizeTransferEvent;
+use App\Models\Transfers;
 use App\Models\TransfersStatus;
 use App\Repositories\TransfersRepository;
 use Exception;
@@ -45,5 +46,18 @@ class TransfersService
         }
 
         throw new Exception('Error creating transfer');
+    }
+
+    public function approve(Transfers $transfer)
+    {
+        $transfer->transfers_status_id = TransfersStatus::STATUS_APPROVED;
+        
+        if($transfer->save())
+        {
+            // event(new FinishTransferEvent($transfer));
+            return $transfer;
+        }
+
+        throw new Exception('Error approving transfer');
     }
 }

@@ -6,5 +6,5 @@ use App\Models\Transfers;
 
 interface Authorizer
 {
-    public function call(Transfers $transfer);
+    public function isAuthorized(Transfers $transfer);
 }

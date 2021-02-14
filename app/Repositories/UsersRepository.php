@@ -54,7 +54,7 @@ class UsersRepository
                 'document' => '85277195092',
                 'email' => 'beltrano@teste.dev',
                 'password' => Hash::make('beltrano@123'),
-                'balance' => 100.00,
+                'balance' => 50.00,
                 'users_types_id' => UsersTypes::TYPE_USER
             ],
             [

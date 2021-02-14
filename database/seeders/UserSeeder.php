@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Repositories\UsersRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -15,9 +15,9 @@ class UserSeeder extends Seeder
     public function run()
     {
         /**
-         * @var UsersRepository
+         * @var UserRepository
          */
-        $userRepository = app(UsersRepository::class);
+        $userRepository = app(UserRepository::class);
         $fakeUsers = $userRepository->fakeUsers();
 
         foreach($fakeUsers as $fakeUser) {

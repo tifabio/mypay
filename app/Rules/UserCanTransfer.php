@@ -3,15 +3,15 @@
 namespace App\Rules;
 
 use App\Models\UserType;
-use App\Repositories\UsersRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Contracts\Validation\Rule;
 
 class UserCanTransfer implements Rule
 {
     /**
-     * @var UsersRepository
+     * @var UserRepository
      */
-    private $usersRepository;
+    private $userRepository;
 
     /**
      * Create a new rule instance.
@@ -20,7 +20,7 @@ class UserCanTransfer implements Rule
      */
     public function __construct()
     {
-        $this->usersRepository = app(UsersRepository::class);
+        $this->userRepository = app(UserRepository::class);
     }
 
     /**
@@ -32,7 +32,7 @@ class UserCanTransfer implements Rule
      */
     public function passes($attribute, $value)
     {
-        $user = $this->usersRepository->find($value);
+        $user = $this->userRepository->find($value);
         return $user->user_types_id !== UserType::TYPE_SHOPKEEPER;
     }
 

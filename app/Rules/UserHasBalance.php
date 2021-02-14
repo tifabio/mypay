@@ -2,15 +2,15 @@
 
 namespace App\Rules;
 
-use App\Repositories\UsersRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Contracts\Validation\Rule;
 
 class UserHasBalance implements Rule
 {
     /**
-     * @var UsersRepository
+     * @var UserRepository
      */
-    private $usersRepository;
+    private $userRepository;
 
     /**
      * @var float
@@ -26,7 +26,7 @@ class UserHasBalance implements Rule
      */
     public function __construct(float $requestedValue)
     {
-        $this->usersRepository = app(UsersRepository::class);
+        $this->userRepository = app(UserRepository::class);
         $this->requestedValue = $requestedValue;
     }
 
@@ -39,7 +39,7 @@ class UserHasBalance implements Rule
      */
     public function passes($attribute, $value)
     {
-        $user = $this->usersRepository->find($value);
+        $user = $this->userRepository->find($value);
         return $user ? $user->balance >= $this->requestedValue : false;
     }
 

@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\UserType;
 use Illuminate\Support\Facades\Hash;
 
-class UsersRepository
+class UserRepository
 {
     /**
      * @var User

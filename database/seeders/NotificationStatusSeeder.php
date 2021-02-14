@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\NotificationsStatus;
+use App\Models\NotificationStatus;
 use Illuminate\Database\Seeder;
 
-class NotificationsStatusSeeder extends Seeder
+class NotificationStatusSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,17 +15,17 @@ class NotificationsStatusSeeder extends Seeder
     public function run()
     {
         /**
-         * @var NotificationsStatus
+         * @var NotificationStatus
          */
-        $model = app(NotificationsStatus::class);
+        $model = app(NotificationStatus::class);
 
         $model->create([
-            'id' => NotificationsStatus::STATUS_PENDING,
+            'id' => NotificationStatus::STATUS_PENDING,
             'status' => 'pending'
         ]);
 
         $model->create([
-            'id' => NotificationsStatus::STATUS_SENT,
+            'id' => NotificationStatus::STATUS_SENT,
             'status' => 'sent'
         ]);
     }

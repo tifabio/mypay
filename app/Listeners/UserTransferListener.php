@@ -3,21 +3,21 @@
 namespace App\Listeners;
 
 use App\Events\ApproveTransferEvent;
-use App\Services\TransfersService;
+use App\Services\TransferService;
 
 class UserTransferListener
 {
     /**
-     * @var TransfersService $transfersService
+     * @var TransferService $transfersService
      */
-    private $usersService;
+    private $transfersService;
 
     /**
      * Create the event listener.
      * 
      * @return void
      */
-    public function __construct(TransfersService $transfersService)
+    public function __construct(TransferService $transfersService)
     {
         $this->transfersService = $transfersService;
     }

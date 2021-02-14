@@ -3,23 +3,23 @@
 namespace App\Listeners;
 
 use App\Events\ApproveTransferEvent;
-use App\Services\TransfersService;
+use App\Services\TransferService;
 
 class ApproveTransferListener
 {
     /**
-     * @var TransfersService $transfersService
+     * @var TransferService $transferService
      */
-    private $transfersService;
+    private $transferService;
 
     /**
      * Create the event listener.
      * 
      * @return void
      */
-    public function __construct(TransfersService $transfersService)
+    public function __construct(TransferService $transferService)
     {
-        $this->transfersService = $transfersService;
+        $this->transferService = $transferService;
     }
 
     /**
@@ -31,6 +31,6 @@ class ApproveTransferListener
      */
     public function handle(ApproveTransferEvent $event)
     {
-        $this->transfersService->approve($event->transfer);
+        $this->transferService->approve($event->transfer);
     }
 }

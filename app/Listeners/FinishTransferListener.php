@@ -3,23 +3,23 @@
 namespace App\Listeners;
 
 use App\Events\FinishTransferEvent;
-use App\Services\TransfersService;
+use App\Services\TransferService;
 
 class FinishTransferListener
 {
     /**
-     * @var TransfersService $transfersService
+     * @var TransferService $transferService
      */
-    private $transfersService;
+    private $transferService;
 
     /**
      * Create the event listener.
      * 
      * @return void
      */
-    public function __construct(TransfersService $transfersService)
+    public function __construct(TransferService $transferService)
     {
-        $this->transfersService = $transfersService;
+        $this->transferService = $transferService;
     }
 
     /**
@@ -31,6 +31,6 @@ class FinishTransferListener
      */
     public function handle(FinishTransferEvent $event)
     {
-        $this->transfersService->finish($event->transfer);
+        $this->transferService->finish($event->transfer);
     }
 }

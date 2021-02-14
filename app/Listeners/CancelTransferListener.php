@@ -3,23 +3,23 @@
 namespace App\Listeners;
 
 use App\Events\CancelTransferEvent;
-use App\Services\TransfersService;
+use App\Services\TransferService;
 
 class CancelTransferListener
 {
     /**
-     * @var TransfersService $transfersService
+     * @var transferService $transferService
      */
-    private $transfersService;
+    private $transferService;
 
     /**
      * Create the event listener.
      * 
      * @return void
      */
-    public function __construct(TransfersService $transfersService)
+    public function __construct(transferService $transferService)
     {
-        $this->transfersService = $transfersService;
+        $this->transferService = $transferService;
     }
 
     /**
@@ -31,6 +31,6 @@ class CancelTransferListener
      */
     public function handle(CancelTransferEvent $event)
     {
-        $this->transfersService->cancel($event->transfer);
+        $this->transferService->cancel($event->transfer);
     }
 }

@@ -4,27 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Rules\UserCanTransfer;
 use App\Rules\UserHasBalance;
-use App\Services\TransfersService;
+use App\Services\TransferService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Throwable;
 
-class TransfersController extends Controller
+class TransferController extends Controller
 {
     /**
-     * @var TransfersService
+     * @var TransferService
      */
     private $transfersService;
 
     /**
      * Create a new controller instance
      * 
-     * @param TransfersService $transfersService
+     * @param TransferService $transfersService
      *
      * @return void
      */
-    public function __construct(TransfersService $transfersService)
+    public function __construct(TransferService $transfersService)
     {
         $this->transfersService = $transfersService;
     }

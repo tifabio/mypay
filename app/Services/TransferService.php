@@ -10,7 +10,7 @@ use App\Models\Transfer;
 use App\Models\TransferStatus;
 use App\Repositories\TransfersRepository;
 
-class TransfersService
+class TransferService
 {
 
     /**

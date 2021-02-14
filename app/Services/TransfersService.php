@@ -73,6 +73,18 @@ class TransfersService
         throw new Exception('Error canceling transfer');
     }
 
+    public function finish(Transfers $transfer)
+    {
+        $transfer->transfers_status_id = TransfersStatus::STATUS_FINISHED;
+        
+        if($transfer->save())
+        {
+            return $transfer;
+        }
+
+        throw new Exception('Error finishing transfer');
+    }
+
     public function transfer(Transfers $transfer)
     {
         if($transfer->transfers_status_id === TransfersStatus::STATUS_APPROVED)
@@ -98,7 +110,7 @@ class TransfersService
                 $transfer->payer->save();
             }
 
-            return;
+            throw new Exception('Error transfering value between users');
         }
 
         throw new Exception('Wrong transfer status while finishing');

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Events\ApproveTransferEvent;
 use App\Events\CancelTransferEvent;
+use App\Exceptions\TransferException;
 use App\Models\Transfers;
 use App\Models\TransfersStatus;
 use App\Repositories\Interfaces\Authorizer;
@@ -42,6 +43,6 @@ class AuthorizerService
             return;
         }
 
-        throw new Exception('Wrong transfer status while authorizing');
+        throw new TransferException(TransferException::WRONG_STATUS_PENDING);
     }
 }

@@ -4,10 +4,10 @@ namespace App\Services;
 
 use App\Events\AuthorizeTransferEvent;
 use App\Events\FinishTransferEvent;
+use App\Exceptions\TransferException;
 use App\Models\Transfers;
 use App\Models\TransfersStatus;
 use App\Repositories\TransfersRepository;
-use Exception;
 
 class TransfersService
 {
@@ -46,7 +46,7 @@ class TransfersService
             return $transfer;
         }
 
-        throw new Exception('Error creating transfer');
+        throw new TransferException(TransferException::CREATE_ERROR);
     }
 
     public function approve(Transfers $transfer)
@@ -58,7 +58,7 @@ class TransfersService
             return $transfer;
         }
 
-        throw new Exception('Error approving transfer');
+        throw new TransferException(TransferException::APPROVE_ERROR);
     }
 
     public function cancel(Transfers $transfer)
@@ -70,7 +70,7 @@ class TransfersService
             return $transfer;
         }
 
-        throw new Exception('Error canceling transfer');
+        throw new TransferException(TransferException::CANCEL_ERROR);
     }
 
     public function finish(Transfers $transfer)
@@ -82,7 +82,7 @@ class TransfersService
             return $transfer;
         }
 
-        throw new Exception('Error finishing transfer');
+        throw new TransferException(TransferException::FINISH_ERROR);
     }
 
     public function transfer(Transfers $transfer)
@@ -110,9 +110,9 @@ class TransfersService
                 $transfer->payer->save();
             }
 
-            throw new Exception('Error transfering value between users');
+            throw new TransferException(TransferException::TRANSFER_ERROR);
         }
 
-        throw new Exception('Wrong transfer status while finishing');
+        throw new TransferException(TransferException::WRONG_STATUS_APPROVED);
     }
 }

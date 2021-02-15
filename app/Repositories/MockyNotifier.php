@@ -10,7 +10,6 @@ class MockyNotifier implements Notifier
 {
     public function send(Notification $notification)
     {
-        dd($notification);
         $response = Http::get(env('MOCKY_NOTIFIER_URL'));
         $sent = isset($response['message']) && $response['message'] === 'Enviado';
         return $sent;

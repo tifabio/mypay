@@ -3,7 +3,9 @@
 namespace App\Services;
 
 use App\Events\SendNotificationEvent;
+use App\Exceptions\NotificationException;
 use App\Models\Interfaces\Notifiable;
+use App\Models\Notification;
 use App\Models\NotificationStatus;
 use App\Repositories\NotificationRepository;
 
@@ -42,5 +44,17 @@ class NotificationService
             event(new SendNotificationEvent($notification));
             return;
         }
+    }
+
+    public function sent(Notification $notification)
+    {
+        $notification->notification_status_id = NotificationStatus::STATUS_SENT;
+        
+        if(!$notification->save())
+        {
+            throw new NotificationException(NotificationException::SAVE_SENT_ERROR);
+        }
+
+        return;
     }
 }

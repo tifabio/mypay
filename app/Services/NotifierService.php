@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Events\NotificationSentEvent;
 use App\Exceptions\NotificationException;
 use App\Models\Notification;
 use App\Models\NotificationStatus;
@@ -32,11 +33,11 @@ class NotifierService
 
             if($sent)
             {
+                event(new NotificationSentEvent($notification));
                 return;
             }
 
             throw new NotificationException(NotificationException::SENT_ERROR);
-            return;
         }
 
         throw new NotificationException(NotificationException::WRONG_STATUS_PENDING);

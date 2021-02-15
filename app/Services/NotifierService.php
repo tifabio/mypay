@@ -2,7 +2,10 @@
 
 namespace App\Services;
 
+use App\Exceptions\NotificationException;
 use App\Models\Notification;
+use App\Models\NotificationStatus;
+use App\Repositories\Interfaces\Notifier;
 
 class NotifierService
 {
@@ -16,13 +19,26 @@ class NotifierService
      *
      * @return void
      */
-    // public function __construct(Notifier $notifier)
-    // {
-    //     $this->notifier = $notifier;
-    // }
+    public function __construct(Notifier $notifier)
+    {
+        $this->notifier = $notifier;
+    }
 
     public function send(Notification $notification)
     {
-        // dd($notification->toArray());
+        if($notification->notification_status_id === NotificationStatus::STATUS_PENDING)
+        {
+            $sent = $this->notifier->send($notification);
+
+            if($sent)
+            {
+                return;
+            }
+
+            throw new NotificationException(NotificationException::SENT_ERROR);
+            return;
+        }
+
+        throw new NotificationException(NotificationException::WRONG_STATUS_PENDING);
     }
 }

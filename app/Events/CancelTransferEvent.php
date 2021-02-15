@@ -2,24 +2,6 @@
 
 namespace App\Events;
 
-use App\Models\Transfer;
-
-class CancelTransferEvent extends Event
+class CancelTransferEvent extends TransferEvent
 {
-    /**
-     * @var Transfer
-     */
-    public $transfer;
-
-    /**
-     * Create a new event instance.
-     * 
-     * @param Transfer $transfer
-     *
-     * @return void
-     */
-    public function __construct(Transfer $transfer)
-    {
-        $this->transfer = $transfer;
-    }
 }

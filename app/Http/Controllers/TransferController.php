@@ -31,7 +31,7 @@ class TransferController extends Controller
 
     public function create(Request $request)
     {
-        $this->validateSaveRequest($request);
+        $this->validateCreateRequest($request);
 
         try {
             $transfer = $this->transferService->create($request->all());
@@ -49,7 +49,7 @@ class TransferController extends Controller
         }
     }
 
-    private function validateSaveRequest(Request $request)
+    private function validateCreateRequest(Request $request)
     {
         $this->validate($request, [
             'value' => [

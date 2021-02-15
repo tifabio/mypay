@@ -8,14 +8,14 @@ use App\Events\Transfer\CancelEvent;
 use App\Events\Transfer\FinishEvent;
 use App\Events\Notification\SendEvent;
 use App\Events\Notification\SentEvent;
-use App\Listeners\ApproveTransferListener;
-use App\Listeners\AuthorizeTransferListener;
-use App\Listeners\CancelTransferListener;
-use App\Listeners\CreateNotificationListener;
-use App\Listeners\FinishTransferListener;
-use App\Listeners\NotificationSentListener;
-use App\Listeners\SendNotificationListener;
-use App\Listeners\UserTransferListener;
+use App\Listeners\Transfer\ApproveListener;
+use App\Listeners\Transfer\AuthorizeListener;
+use App\Listeners\Transfer\CancelListener;
+use App\Listeners\Transfer\FinishListener;
+use App\Listeners\Transfer\TransferListener;
+use App\Listeners\Notification\CreateListener;
+use App\Listeners\Notification\SentListener;
+use App\Listeners\Notification\SendListener;
 use Laravel\Lumen\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -27,24 +27,24 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         AuthorizeEvent::class => [
-            AuthorizeTransferListener::class
+            AuthorizeListener::class
         ],
         ApproveEvent::class => [
-            ApproveTransferListener::class,
-            UserTransferListener::class
+            ApproveListener::class,
+            TransferListener::class
         ],
         CancelEvent::class => [
-            CancelTransferListener::class
+            CancelListener::class
         ],
         FinishEvent::class => [
-            FinishTransferListener::class,
-            CreateNotificationListener::class
+            FinishListener::class,
+            CreateListener::class
         ],
         SendEvent::class => [
-            SendNotificationListener::class
+            SendListener::class
         ],
         SentEvent::class => [
-            NotificationSentListener::class
+            SentListener::class
         ]
     ];
 }

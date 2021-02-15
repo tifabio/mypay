@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Listeners\Transfer;
 
 use App\Events\Transfer\AuthorizeEvent;
 use App\Services\AuthorizerService;
 
-class AuthorizeTransferListener
+class AuthorizeListener
 {
     /**
      * @var AuthorizerService $authorizerService

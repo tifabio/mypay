@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Listeners\Notification;
 
 use App\Events\Notification\SendEvent;
 use App\Services\NotifierService;
 
-class SendNotificationListener
+class SendListener
 {
     /**
      * @var NotifierService $notifierService

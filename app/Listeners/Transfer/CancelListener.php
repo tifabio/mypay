@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Listeners\Transfer;
 
 use App\Events\Transfer\CancelEvent;
 use App\Services\TransferService;
 
-class CancelTransferListener
+class CancelListener
 {
     /**
      * @var transferService $transferService

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Listeners\Notification;
 
-use App\Events\Notification\SentEvent;
+use App\Events\Transfer\FinishEvent;
 use App\Services\NotificationService;
 
-class NotificationSentListener
+class CreateListener
 {
     /**
      * @var NotificationService $transferService
@@ -25,12 +25,12 @@ class NotificationSentListener
     /**
      * Handle the event.
      *
-     * @param  SentEvent $event
+     * @param FinishEvent $event
      * 
      * @return void
      */
-    public function handle(SentEvent $event)
+    public function handle(FinishEvent $event)
     {
-        $this->notificationService->sent($event->notification);
+        $this->notificationService->create($event->transfer);
     }
 }

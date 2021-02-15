@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Listeners\Transfer;
 
 use App\Events\Transfer\ApproveEvent;
 use App\Services\TransferService;
 
-class UserTransferListener
+class ApproveListener
 {
     /**
      * @var TransferService $transferService
@@ -31,6 +31,6 @@ class UserTransferListener
      */
     public function handle(ApproveEvent $event)
     {
-        $this->transferService->transfer($event->transfer);
+        $this->transferService->approve($event->transfer);
     }
 }

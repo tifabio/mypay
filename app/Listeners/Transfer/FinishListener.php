@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Listeners\Transfer;
 
-use App\Events\Transfer\ApproveEvent;
+use App\Events\Transfer\FinishEvent;
 use App\Services\TransferService;
 
-class ApproveTransferListener
+class FinishListener
 {
     /**
      * @var TransferService $transferService
@@ -25,12 +25,12 @@ class ApproveTransferListener
     /**
      * Handle the event.
      *
-     * @param  ApproveEvent $event
+     * @param  FinishEvent $event
      * 
      * @return void
      */
-    public function handle(ApproveEvent $event)
+    public function handle(FinishEvent $event)
     {
-        $this->transferService->approve($event->transfer);
+        $this->transferService->finish($event->transfer);
     }
 }

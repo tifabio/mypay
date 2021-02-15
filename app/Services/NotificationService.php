@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Events\SendNotificationEvent;
 use App\Models\Interfaces\Notifiable;
 use App\Models\NotificationStatus;
 use App\Repositories\NotificationRepository;
@@ -38,7 +39,7 @@ class NotificationService
 
         if($notification)
         {
-            // event(new AuthorizeTransferEvent($transfer));
+            event(new SendNotificationEvent($notification));
             return;
         }
     }

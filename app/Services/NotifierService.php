@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Events\NotificationSentEvent;
+use App\Events\Notification\SentEvent;
 use App\Exceptions\NotificationException;
 use App\Models\Notification;
 use App\Models\NotificationStatus;
@@ -33,7 +33,7 @@ class NotifierService
 
             if($sent)
             {
-                event(new NotificationSentEvent($notification));
+                event(new SentEvent($notification));
                 return;
             }
 

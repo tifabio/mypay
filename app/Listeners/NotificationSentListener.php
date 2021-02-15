@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\NotificationSentEvent;
+use App\Events\Notification\SentEvent;
 use App\Services\NotificationService;
 
 class NotificationSentListener
@@ -25,11 +25,11 @@ class NotificationSentListener
     /**
      * Handle the event.
      *
-     * @param  NotificationSentEvent $event
+     * @param  SentEvent $event
      * 
      * @return void
      */
-    public function handle(NotificationSentEvent $event)
+    public function handle(SentEvent $event)
     {
         $this->notificationService->sent($event->notification);
     }

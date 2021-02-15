@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\SendNotificationEvent;
+use App\Events\Notification\SendEvent;
 use App\Repositories\MockyNotifier;
 use App\Services\NotifierService;
 
@@ -26,11 +26,11 @@ class SendNotificationListener
     /**
      * Handle the event.
      *
-     * @param  SendNotificationEvent $event
+     * @param  SendEvent $event
      * 
      * @return void
      */
-    public function handle(SendNotificationEvent $event)
+    public function handle(SendEvent $event)
     {
         $this->notifierService->send($event->notification);
     }

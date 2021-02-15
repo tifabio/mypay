@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Events\SendNotificationEvent;
+use App\Events\Notification\SendEvent;
 use App\Exceptions\NotificationException;
 use App\Models\Interfaces\Notifiable;
 use App\Models\Notification;
@@ -41,7 +41,7 @@ class NotificationService
 
         if($notification)
         {
-            event(new SendNotificationEvent($notification));
+            event(new SendEvent($notification));
             return;
         }
     }
@@ -54,7 +54,5 @@ class NotificationService
         {
             throw new NotificationException(NotificationException::SAVE_SENT_ERROR);
         }
-
-        return;
     }
 }

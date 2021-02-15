@@ -6,8 +6,8 @@ use App\Events\Transfer\ApproveEvent;
 use App\Events\Transfer\AuthorizeEvent;
 use App\Events\Transfer\CancelEvent;
 use App\Events\Transfer\FinishEvent;
-use App\Events\NotificationSentEvent;
-use App\Events\SendNotificationEvent;
+use App\Events\Notification\SendEvent;
+use App\Events\Notification\SentEvent;
 use App\Listeners\ApproveTransferListener;
 use App\Listeners\AuthorizeTransferListener;
 use App\Listeners\CancelTransferListener;
@@ -40,10 +40,10 @@ class EventServiceProvider extends ServiceProvider
             FinishTransferListener::class,
             CreateNotificationListener::class
         ],
-        SendNotificationEvent::class => [
+        SendEvent::class => [
             SendNotificationListener::class
         ],
-        NotificationSentEvent::class => [
+        SentEvent::class => [
             NotificationSentListener::class
         ]
     ];

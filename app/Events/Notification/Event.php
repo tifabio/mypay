@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Events;
+namespace App\Events\Notification;
 
 use App\Models\Notification;
 use Illuminate\Queue\SerializesModels;
 
-abstract class NotificationEvent
+abstract class Event
 {
     use SerializesModels;
 

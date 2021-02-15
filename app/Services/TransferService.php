@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-use App\Events\AuthorizeTransferEvent;
-use App\Events\CancelTransferEvent;
-use App\Events\FinishTransferEvent;
+use App\Events\Transfer\AuthorizeEvent;
+use App\Events\Transfer\CancelEvent;
+use App\Events\Transfer\FinishEvent;
 use App\Exceptions\TransferException;
 use App\Models\Transfer;
 use App\Models\TransferStatus;
@@ -43,7 +43,7 @@ class TransferService
 
         if($transfer)
         {
-            event(new AuthorizeTransferEvent($transfer));
+            event(new AuthorizeEvent($transfer));
             return $transfer;
         }
 
@@ -102,7 +102,7 @@ class TransferService
 
                 if($payeeReceive)
                 {
-                    event(new FinishTransferEvent($transfer));
+                    event(new FinishEvent($transfer));
                     return $transfer;
                 }
 
@@ -135,7 +135,7 @@ class TransferService
 
                 if($payeeReturn)
                 {
-                    event(new CancelTransferEvent($transfer));
+                    event(new CancelEvent($transfer));
                     return $transfer;
                 }
 

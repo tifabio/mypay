@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\CancelTransferEvent;
+use App\Events\Transfer\CancelEvent;
 use App\Services\TransferService;
 
 class CancelTransferListener
@@ -25,11 +25,11 @@ class CancelTransferListener
     /**
      * Handle the event.
      *
-     * @param  CancelTransferEvent $event
+     * @param  CancelEvent $event
      * 
      * @return void
      */
-    public function handle(CancelTransferEvent $event)
+    public function handle(CancelEvent $event)
     {
         $this->transferService->cancel($event->transfer);
     }

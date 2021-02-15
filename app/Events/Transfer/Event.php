@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Events;
+namespace App\Events\Transfer;
 
 use App\Models\Transfer;
 use Illuminate\Queue\SerializesModels;
 
-abstract class TransferEvent
+abstract class Event
 {
     use SerializesModels;
 

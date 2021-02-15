@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\FinishTransferEvent;
+use App\Events\Transfer\FinishEvent;
 use App\Services\TransferService;
 
 class FinishTransferListener
@@ -25,11 +25,11 @@ class FinishTransferListener
     /**
      * Handle the event.
      *
-     * @param  FinishTransferEvent $event
+     * @param  FinishEvent $event
      * 
      * @return void
      */
-    public function handle(FinishTransferEvent $event)
+    public function handle(FinishEvent $event)
     {
         $this->transferService->finish($event->transfer);
     }

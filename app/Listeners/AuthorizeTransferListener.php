@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\AuthorizeTransferEvent;
+use App\Events\Transfer\AuthorizeEvent;
 use App\Repositories\MockyAuthorizer;
 use App\Services\AuthorizerService;
 
@@ -26,11 +26,11 @@ class AuthorizeTransferListener
     /**
      * Handle the event.
      *
-     * @param  AuthorizeTransferEvent $event
+     * @param  AuthorizeEvent $event
      * 
      * @return void
      */
-    public function handle(AuthorizeTransferEvent $event)
+    public function handle(AuthorizeEvent $event)
     {
         $this->authorizerService->process($event->transfer);
     }

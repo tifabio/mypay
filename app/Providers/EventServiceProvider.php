@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use App\Events\ApproveTransferEvent;
-use App\Events\AuthorizeTransferEvent;
-use App\Events\CancelTransferEvent;
-use App\Events\FinishTransferEvent;
+use App\Events\Transfer\ApproveEvent;
+use App\Events\Transfer\AuthorizeEvent;
+use App\Events\Transfer\CancelEvent;
+use App\Events\Transfer\FinishEvent;
 use App\Events\NotificationSentEvent;
 use App\Events\SendNotificationEvent;
 use App\Listeners\ApproveTransferListener;
@@ -26,17 +26,17 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        AuthorizeTransferEvent::class => [
+        AuthorizeEvent::class => [
             AuthorizeTransferListener::class
         ],
-        ApproveTransferEvent::class => [
+        ApproveEvent::class => [
             ApproveTransferListener::class,
             UserTransferListener::class
         ],
-        CancelTransferEvent::class => [
+        CancelEvent::class => [
             CancelTransferListener::class
         ],
-        FinishTransferEvent::class => [
+        FinishEvent::class => [
             FinishTransferListener::class,
             CreateNotificationListener::class
         ],

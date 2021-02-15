@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\ApproveTransferEvent;
+use App\Events\Transfer\ApproveEvent;
 use App\Services\TransferService;
 
 class UserTransferListener
@@ -25,11 +25,11 @@ class UserTransferListener
     /**
      * Handle the event.
      *
-     * @param  ApproveTransferEvent $event
+     * @param  ApproveEvent $event
      * 
      * @return void
      */
-    public function handle(ApproveTransferEvent $event)
+    public function handle(ApproveEvent $event)
     {
         $this->transferService->transfer($event->transfer);
     }

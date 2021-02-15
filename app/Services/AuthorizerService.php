@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\Events\ApproveTransferEvent;
-use App\Events\CancelTransferEvent;
+use App\Events\Transfer\ApproveEvent;
+use App\Events\Transfer\CancelEvent;
 use App\Exceptions\TransferException;
 use App\Models\Transfer;
 use App\Models\TransferStatus;
@@ -34,11 +34,11 @@ class AuthorizerService
 
             if($approved)
             {
-                event(new ApproveTransferEvent($transfer));
+                event(new ApproveEvent($transfer));
                 return;
             }
 
-            event(new CancelTransferEvent($transfer));
+            event(new CancelEvent($transfer));
             return;
         }
 

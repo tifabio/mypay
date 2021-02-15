@@ -42,10 +42,11 @@ class TransferController extends Controller
                 );
             }
         } catch (Exception | Throwable $e) {
-            return response()->json(
-                ['error' => $e->getMessage()],
-                JsonResponse::HTTP_INTERNAL_SERVER_ERROR
-            );
+            throw new Exception($e);
+            // return response()->json(
+            //     ['error' => $e->getMessage()],
+            //     JsonResponse::HTTP_INTERNAL_SERVER_ERROR
+            // );
         }
     }
 

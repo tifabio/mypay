@@ -10,16 +10,16 @@ class UserTransferListener
     /**
      * @var TransferService $transferService
      */
-    private $transfersService;
+    private $transferService;
 
     /**
      * Create the event listener.
      * 
      * @return void
      */
-    public function __construct(TransferService $transfersService)
+    public function __construct(TransferService $transferService)
     {
-        $this->transfersService = $transfersService;
+        $this->transferService = $transferService;
     }
 
     /**
@@ -31,6 +31,6 @@ class UserTransferListener
      */
     public function handle(ApproveTransferEvent $event)
     {
-        $this->transfersService->transfer($event->transfer);
+        $this->transferService->transfer($event->transfer);
     }
 }

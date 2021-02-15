@@ -9,6 +9,7 @@ use App\Events\FinishTransferEvent;
 use App\Listeners\ApproveTransferListener;
 use App\Listeners\AuthorizeTransferListener;
 use App\Listeners\CancelTransferListener;
+use App\Listeners\CreateNotificationListener;
 use App\Listeners\FinishTransferListener;
 use App\Listeners\UserTransferListener;
 use Laravel\Lumen\Providers\EventServiceProvider as ServiceProvider;
@@ -32,7 +33,8 @@ class EventServiceProvider extends ServiceProvider
             CancelTransferListener::class
         ],
         FinishTransferEvent::class => [
-            FinishTransferListener::class
+            FinishTransferListener::class,
+            CreateNotificationListener::class
         ]
     ];
 }

@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Interfaces\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
-class Transfer extends Model
+class Transfer extends Model implements Notifiable
 {
     /**
      * The attributes that are mass assignable.
@@ -39,5 +40,15 @@ class Transfer extends Model
 
     public function status() {
         return $this->hasOne(TransferStatus::class, 'id', 'transfer_status_id');
+    }
+
+    public function getNotificationContent()
+    {
+        return "{$this->payer->name} sent you {$this->value}";
+    }
+
+    public function getNotificationUser()
+    {
+        return $this->payee->id;
     }
 }

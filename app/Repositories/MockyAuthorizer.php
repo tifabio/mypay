@@ -10,7 +10,7 @@ class MockyAuthorizer implements Authorizer
 {
     public function isAuthorized(Transfer $transfer)
     {
-        $response = Http::get(env('MOCKY_AUTHORIZER_URL'));
+        $response = Http::get(env('AUTHORIZER_URL'));
         $authorized = isset($response['message']) && $response['message'] === 'Autorizado';
         return $authorized;
     }

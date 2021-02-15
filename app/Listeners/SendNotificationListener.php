@@ -3,7 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\Notification\SendEvent;
-use App\Repositories\MockyNotifier;
 use App\Services\NotifierService;
 
 class SendNotificationListener
@@ -18,9 +17,9 @@ class SendNotificationListener
      * 
      * @return void
      */
-    public function __construct()
+    public function __construct(NotifierService $notifierService)
     {
-        $this->notifierService = new NotifierService(new MockyNotifier);
+        $this->notifierService = $notifierService;
     }
 
     /**

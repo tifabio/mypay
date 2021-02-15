@@ -20,9 +20,9 @@ class NotifierService
      *
      * @return void
      */
-    public function __construct(Notifier $notifier)
+    public function __construct()
     {
-        $this->notifier = $notifier;
+        $this->notifier = app('notifier')->driver();
     }
 
     public function send(Notification $notification)

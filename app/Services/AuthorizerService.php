@@ -21,9 +21,9 @@ class AuthorizerService
      *
      * @return void
      */
-    public function __construct(Authorizer $authorizer)
+    public function __construct()
     {
-        $this->authorizer = $authorizer;
+        $this->authorizer = app('authorizer')->driver();
     }
 
     public function process(Transfer $transfer)

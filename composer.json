@@ -12,7 +12,8 @@
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
         "mockery/mockery": "^1.3.1",
-        "phpunit/phpunit": "^9.3"
+        "phpunit/phpunit": "^9.3",
+        "zircote/swagger-php": "^3.1"
     },
     "autoload": {
         "psr-4": {
@@ -36,6 +37,9 @@
     "scripts": {
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "create-swagger": [
+            "openapi app -o docs/swagger.json -b swagger.php"
         ]
     }
 }

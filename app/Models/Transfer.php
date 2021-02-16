@@ -5,6 +5,20 @@ namespace App\Models;
 use App\Models\Interfaces\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @OA\Schema(
+ *      description="Transfer Model",
+ *      title="Transfer Model",
+ *      type="object",
+ *      @OA\Property(property="id", type="integer"),
+ *      @OA\Property(property="value", type="number"),
+ *      @OA\Property(property="payer_id", type="integer"),
+ *      @OA\Property(property="payee_id", type="integer"),
+ *      @OA\Property(property="transfer_status_id", type="integer"),
+ *      @OA\Property(property="created_at", type="string"),
+ *      @OA\Property(property="updated_at", type="string")
+ * )
+ */
 class Transfer extends Model implements Notifiable
 {
     /**

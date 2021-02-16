@@ -1,0 +1,99 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "MyPay Documentation",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8080"
+        }
+    ],
+    "paths": {
+        "/api/transfer": {
+            "post": {
+                "tags": [
+                    "Transfer"
+                ],
+                "description": "Used to transfer money between users",
+                "operationId": "App\\Http\\Controllers\\TransferController::create",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "value",
+                                    "payer",
+                                    "payee"
+                                ],
+                                "properties": {
+                                    "value": {
+                                        "type": "number"
+                                    },
+                                    "payer": {
+                                        "type": "integer"
+                                    },
+                                    "payee": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Transfer created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Transfer"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Please send required fields"
+                    },
+                    "500": {
+                        "description": "Whoops, we had a problem"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Transfer": {
+                "title": "Transfer Model",
+                "description": "Transfer Model",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "value": {
+                        "type": "number"
+                    },
+                    "payer_id": {
+                        "type": "integer"
+                    },
+                    "payee_id": {
+                        "type": "integer"
+                    },
+                    "transfer_status_id": {
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "type": "string"
+                    },
+                    "updated_at": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}

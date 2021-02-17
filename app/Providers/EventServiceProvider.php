@@ -2,20 +2,10 @@
 
 namespace App\Providers;
 
-use App\Events\Transfer\ApproveEvent;
-use App\Events\Transfer\AuthorizeEvent;
-use App\Events\Transfer\CancelEvent;
-use App\Events\Transfer\FinishEvent;
-use App\Events\Notification\SendEvent;
-use App\Events\Notification\SentEvent;
-use App\Listeners\Transfer\ApproveListener;
-use App\Listeners\Transfer\AuthorizeListener;
-use App\Listeners\Transfer\CancelListener;
-use App\Listeners\Transfer\FinishListener;
-use App\Listeners\Transfer\TransferListener;
-use App\Listeners\Notification\CreateListener;
-use App\Listeners\Notification\SentListener;
-use App\Listeners\Notification\SendListener;
+use App\Events\Transfer\{ApproveEvent, AuthorizeEvent, CancelEvent, FinishEvent};
+use App\Events\Notification\{SendEvent, SentEvent};
+use App\Listeners\Transfer\{ApproveListener, AuthorizeListener, CancelListener, FinishListener, TransferListener};
+use App\Listeners\Notification\{CreateListener, SendListener, SentListener};
 use Laravel\Lumen\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider

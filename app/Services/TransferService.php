@@ -9,6 +9,7 @@ use App\Exceptions\TransferException;
 use App\Models\Transfer;
 use App\Models\TransferStatus;
 use App\Repositories\TransferRepository;
+use Illuminate\Support\Facades\DB;
 
 class TransferService
 {
@@ -90,28 +91,22 @@ class TransferService
     {
         if($transfer->transfer_status_id === TransferStatus::STATUS_APPROVED)
         {
-            // Payer send money
-            $transfer->payer->balance -= $transfer->value;
-            $payerPay = $transfer->payer->save();
+            return DB::transaction(function () use ($transfer) {
+                // Payer send money
+                $transfer->payer->balance -= $transfer->value;
+                $payerPay = $transfer->payer->save();
 
-            if($payerPay)
-            {
                 // Payee receives money
                 $transfer->payee->balance += $transfer->value;
                 $payeeReceive = $transfer->payee->save();
 
-                if($payeeReceive)
-                {
+                if($payerPay && $payeeReceive) {
                     event(new FinishEvent($transfer));
                     return $transfer;
                 }
 
-                // Payment failed, return money to payer
-                $transfer->payer->balance += $transfer->value;
-                $transfer->payer->save();
-            }
-
-            throw new TransferException(TransferException::TRANSFER_ERROR);
+                throw new TransferException(TransferException::TRANSFER_ERROR);
+            });
         }
 
         throw new TransferException(TransferException::WRONG_STATUS_APPROVED);
@@ -123,28 +118,23 @@ class TransferService
 
         if($transfer->transfer_status_id === TransferStatus::STATUS_FINISHED)
         {
-            // Payer refunds money
-            $transfer->payer->balance += $transfer->value;
-            $payerRefund = $transfer->payer->save();
+            return DB::transaction(function () use ($transfer) {
+                // Payer refunds money
+                $transfer->payer->balance += $transfer->value;
+                $payerRefund = $transfer->payer->save();
 
-            if($payerRefund)
-            {
                 // Payee returns money
                 $transfer->payee->balance -= $transfer->value;
                 $payeeReturn = $transfer->payee->save();
 
-                if($payeeReturn)
+                if($payerRefund && $payeeReturn)
                 {
                     event(new CancelEvent($transfer));
                     return $transfer;
                 }
 
-                // Revert failed, back to original
-                $transfer->payer->balance -= $transfer->value;
-                $transfer->payer->save();
-            }
-
-            throw new TransferException(TransferException::REVERT_ERROR);
+                throw new TransferException(TransferException::REVERT_ERROR);
+            });
         }
 
         throw new TransferException(TransferException::WRONG_STATUS_FINISHED);
